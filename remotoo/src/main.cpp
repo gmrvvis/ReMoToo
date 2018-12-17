@@ -5,6 +5,7 @@
 #include <media/mediaDesktop.h>
 #include <media/mediaWebStreamer.h>
 #include <util/Utils.h>
+#include <IO/WSInputProcessor.h>
 
 #include <webstreamer/console_logger.hpp>
 #include <webstreamer/file_logger.hpp>
@@ -12,7 +13,6 @@
 #include <webstreamer/webstreamer.hpp>
 
 #include "XDOTOOLInputHandler.h"
-#include "ComThread.h"
 
 /*
 #define SCREEN_SIZE_X 1920
@@ -30,11 +30,12 @@ int main(int argc, char *argv[])
 
   CreateImmortalLogListener<ConsoleLogger>(LogLevel::WARNING);
 
-  remo::InputManager::getInstance().registerInputHandler<desktopstreamer::inputhandler::XDOTOOLInputHandler>();
+	const unsigned int desktopWidth = 1280;
+	const unsigned int desktopHeight = 720;
 
   //Define the input media and stream
   std::unique_ptr < remo::media >
-    im = std::unique_ptr < remo::mediaDesktop > ( new remo::mediaDesktop ( ));
+    im = std::unique_ptr < remo::mediaDesktop > ( new remo::mediaDesktop ( desktopWidth, desktopHeight ));
   std::unique_ptr < remo::stream >
     is = std::unique_ptr < remo::streamDeviceIn > ( new remo::streamDeviceIn
                                                       ( im.get ( )));
@@ -42,6 +43,15 @@ int main(int argc, char *argv[])
   //Define the output media and stream (define the dimensions here if default dont work).
   std::unique_ptr < remo::media > om =
     std::unique_ptr < remo::mediaWebStreamer > ( new remo::mediaWebStreamer ( ));
+
+	remo::WSInputProcessor webstreamerInputProcessor;
+	webstreamerInputProcessor.setScreenSize(desktopWidth, desktopHeight);
+	remo::mediaWebStreamer * mws = static_cast<remo::mediaWebStreamer*>(om.get());
+	mws->setInputProcessor(webstreamerInputProcessor);
+	// TODO: Get rid of static accessors
+	remo::InputManager::getInstance()
+		.registerInputHandler<desktopstreamer::inputhandler::XDOTOOLInputHandler>();
+
   std::unique_ptr < remo::stream >
     os = std::unique_ptr < remo::streamWebStreamer > ( new remo::streamWebStreamer ( om.get ( )));
 
