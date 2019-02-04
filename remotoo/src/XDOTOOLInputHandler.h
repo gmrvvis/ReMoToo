@@ -1,7 +1,7 @@
 #ifndef __DESKTOPSTREAMER_INPUTHANDLER_XDOTOOLINPUTHANDLER_H__
 #define __DESKTOPSTREAMER_INPUTHANDLER_XDOTOOLINPUTHANDLER_H__
 
-#include <util/IO/Abstractinputhandler.h>
+#include <util/IO/AbstractInputhandler.h>
 
 #include <string>
 

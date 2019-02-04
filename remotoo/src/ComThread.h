@@ -23,7 +23,8 @@ namespace desktopstreamer
 			bool running;
 		public:
 			ComThread(const std::string & name, int * sdf);
-			~ComThread();
+			//virtual ~ComThread() {};
+      ~ComThread();
 
 			void start();
 			void shutDown();

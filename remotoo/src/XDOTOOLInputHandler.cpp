@@ -61,6 +61,8 @@ namespace desktopstreamer
 				case inputhandler::MouseInputState::MIS_BUTTON_DBL_CLICK:
 					mouseDblClick(button);
 					break;
+				default:
+					std::cout<<"Unknown button received ... remove dummy configuration!"<<std::endl;
 			}
 		}
 
@@ -105,6 +107,8 @@ namespace desktopstreamer
 						lastKeyPressed = "";
 					}
 					break;
+				default:
+					std::cout<<"Unknown key received ... remove dummy configuration!"<<std::endl;
 			}
 		}
 

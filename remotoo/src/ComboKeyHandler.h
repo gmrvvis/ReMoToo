@@ -13,9 +13,10 @@ namespace desktopstreamer
 	{
 		private:
 			std::unordered_map<std::string, std::unique_ptr<ComboNode>> tree;
-			std::string key;
+			std::string _key;
 		public:
 			ComboNode(const std::string & key);
+      virtual ~ComboNode() {};
 			virtual bool evaluate(std::list<std::string> & chain);
 			const std::string & getKey();
 
@@ -26,8 +27,9 @@ namespace desktopstreamer
 	class ComboLeaf : public ComboNode
 	{
 		private:
-			std::function<void(void)> action;
+			std::function<void(void)> _action;
 		public:
+      virtual ~ComboLeaf() {};
 			ComboLeaf(const std::string & key, const std::function<void(void)> & action);
 			bool evaluate(std::list<std::string> & chain);
 	};

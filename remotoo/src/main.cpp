@@ -1,11 +1,16 @@
 #include <iostream>
 
-#include <flow/flowDeviceToWebStream.h>
+#ifndef REMO_USE_WEBSTREAMER
+#define REMO_USE_WEBSTREAMER
+#endif
+
+#include <flow/FlowDeviceToWebStream.h>
 #include <pipeline/ImageConverter.h>
-#include <media/mediaDesktop.h>
-#include <media/mediaWebStreamer.h>
+#include <media/MediaDesktop.h>
+#include <media/MediaWebStreamer.h>
 #include <util/Utils.h>
-#include <IO/WSInputProcessor.h>
+
+#include <IO/WebstreamerInputProcessor.h>
 
 #include <webstreamer/console_logger.hpp>
 #include <webstreamer/file_logger.hpp>
@@ -14,12 +19,8 @@
 
 #include "XDOTOOLInputHandler.h"
 
-/*
-#define SCREEN_SIZE_X 1920
-#define SCREEN_SIZE_Y 1080
-*/
-
-int main(int argc, char *argv[])
+//int main(int argc, char *argv[])
+int main( void )
 {
 	// ====================================================================
   // Web streamer set up
@@ -34,31 +35,31 @@ int main(int argc, char *argv[])
 	const unsigned int desktopHeight = 720;
 
   //Define the input media and stream
-  std::unique_ptr < remo::media >
-    im = std::unique_ptr < remo::mediaDesktop > ( new remo::mediaDesktop ( desktopWidth, desktopHeight ));
-  std::unique_ptr < remo::stream >
-    is = std::unique_ptr < remo::streamDeviceIn > ( new remo::streamDeviceIn
+  std::unique_ptr < remo::Media >
+    im = std::unique_ptr < remo::MediaDesktop > ( new remo::MediaDesktop ( desktopWidth, desktopHeight ));
+  std::unique_ptr < remo::Stream >
+    is = std::unique_ptr < remo::StreamDeviceIn > ( new remo::StreamDeviceIn
                                                       ( im.get ( )));
 
   //Define the output media and stream (define the dimensions here if default dont work).
-  std::unique_ptr < remo::media > om =
-    std::unique_ptr < remo::mediaWebStreamer > ( new remo::mediaWebStreamer ( ));
+  std::unique_ptr < remo::Media > om =
+    std::unique_ptr < remo::MediaWebStreamer > ( new remo::MediaWebStreamer ( ));
 
-	remo::WSInputProcessor webstreamerInputProcessor;
-	webstreamerInputProcessor.setScreenSize(desktopWidth, desktopHeight);
-	remo::mediaWebStreamer * mws = static_cast<remo::mediaWebStreamer*>(om.get());
-	mws->setInputProcessor(webstreamerInputProcessor);
+	//remo::WSInputProcessor webstreamerInputProcessor;
+  remo::WebstreamerInputProcessor webstreamerInputProcessor_;
+	webstreamerInputProcessor_.setScreenSize(desktopWidth, desktopHeight);
+	remo::MediaWebStreamer * mws = static_cast<remo::MediaWebStreamer*>(om.get());
+	mws->setInputProcessor(webstreamerInputProcessor_);
 	// TODO: Get rid of static accessors
 	remo::InputManager::getInstance()
 		.registerInputHandler<desktopstreamer::inputhandler::XDOTOOLInputHandler>();
 
-  std::unique_ptr < remo::stream >
-    os = std::unique_ptr < remo::streamWebStreamer > ( new remo::streamWebStreamer ( om.get ( )));
+  std::unique_ptr < remo::Stream >
+    os = std::unique_ptr < remo::StreamWebStreamer > ( new remo::StreamWebStreamer ( om.get ( )));
 
   //Define the flow and process
-  remo::flowDeviceToWebStream f ( is.get ( ), os.get ( ));
+  remo::FlowDeviceToWebStream f ( is.get ( ), os.get ( ));
   f.processStreams ( );
 
   return 0;
 }
-

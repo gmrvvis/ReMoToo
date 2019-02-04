@@ -9,7 +9,7 @@
 namespace desktopstreamer
 {
 	ComboNode::ComboNode(const std::string & key)
-		: key(key)
+		: _key(key)
 	{
 	}
 
@@ -29,7 +29,7 @@ namespace desktopstreamer
 
 	const std::string & ComboNode::getKey()
 	{
-		return key;
+		return _key;
 	}
 
 	ComboNode & ComboNode::registerNode(const std::string & key)
@@ -68,13 +68,14 @@ namespace desktopstreamer
 
 	ComboLeaf::ComboLeaf(const std::string & key, const std::function<void(void)> & action)
 		: ComboNode(key)
-		,	action(action)
+		,	_action(action)
 	{
 	}
 	
 	bool ComboLeaf::evaluate(std::list<std::string> & chain)
 	{
-		action();
+    (void)chain;
+		_action();
 		return true;
 	}
 
