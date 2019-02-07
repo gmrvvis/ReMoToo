@@ -1,2 +1,2 @@
 #-*- mode: cmake -*-
-git_subproject(ReMo git@gitlab.gmrv.es:juanpebm/remo.git c927f0ef)
+git_subproject(ReMo git@gitlab.gmrv.es:juanpebm/remo.git ae47ef67)

@@ -1,0 +1,29 @@
+#include "serverpackets/RequestSessionInfo.h"
+
+#include "Session.h"
+#include "clientpackets/SessionInfo.h"
+
+namespace remotoo
+{
+  namespace serverpackets
+  {
+    char RequestSessionInfo::getOpcode ( )
+    {
+      return 0x00;
+    }
+
+    void RequestSessionInfo::readImpl ( )
+    {
+
+    }
+
+    void RequestSessionInfo::executePacketAction ( )
+    {
+      remolonUtil::Client & clnt = Session::getInstance ( ).getClient ( );
+
+      remolonUtil::SendablePacketPtr info = std::make_unique < clientpackets::SessionInfo > ( );
+
+      clnt.sendPacket ( info );
+    }
+  }
+}

@@ -1,5 +1,5 @@
-#ifndef __DESKTOPSTREAMER_COMBOKEYHANDLER_H__
-#define __DESKTOPSTREAMER_COMBOKEYHANDLER_H__
+#ifndef __REMOTOO_COMBOKEYHANDLER_H__
+#define __REMOTOO_COMBOKEYHANDLER_H__
 
 #include <list>
 #include <unordered_set>
@@ -7,51 +7,50 @@
 #include <functional>
 #include <memory>
 
-namespace desktopstreamer
+namespace remotoo
 {
 	class ComboNode
 	{
-		private:
-			std::unordered_map<std::string, std::unique_ptr<ComboNode>> tree;
-			std::string _key;
-		public:
-			ComboNode(const std::string & key);
-      virtual ~ComboNode() {};
-			virtual bool evaluate(std::list<std::string> & chain);
+    public:
+			ComboNode ( const std::string & key_ );
+			virtual ~ComboNode ( );
+			virtual bool evaluate ( std::list<std::string> & chain_ );
 			const std::string & getKey();
 
-			ComboNode & registerNode(const std::string & key);
-			ComboNode & registerLeaf(const std::string & key, const std::function<void(void)> & action);
+			ComboNode & registerNode ( const std::string & key_ );
+			ComboNode & registerLeaf ( const std::string & key_, const std::function<void(void)> & action_ );
+
+		private:
+			std::unordered_map < std::string, std::unique_ptr < ComboNode > > _tree;
+			std::string _key;
 	};
 
 	class ComboLeaf : public ComboNode
 	{
-		private:
-			std::function<void(void)> _action;
 		public:
-      virtual ~ComboLeaf() {};
-			ComboLeaf(const std::string & key, const std::function<void(void)> & action);
-			bool evaluate(std::list<std::string> & chain);
+			ComboLeaf ( const std::string & key_, const std::function < void ( void ) > & action_ );
+			bool evaluate( std::list<std::string> & chain_ );
+
+    private:
+			std::function < void ( void ) > _action;
 	};
 
 	class ComboKeyHandler
 	{
-		private:
-			static ComboKeyHandler INSTANCE;
 		public:
-			static ComboKeyHandler & getInstance();
+			static ComboKeyHandler & getInstance ( );
+      ~ComboKeyHandler ( );
+			ComboNode & registerCombo ( const std::string & firstKey_ );
+			bool evaluateKeyPress ( const std::string & key_ );
+			bool evaluateKeyUp ( const std::string & key_ );
+			void executeCommand ( const std::string & xdotoolCommand_ );
+
 		private:
-			std::unordered_map<std::string, std::unique_ptr<ComboNode>> root;
-			std::list<std::string> comboChain;
-			std::unordered_set<std::string> specialKeys;
-		private:
-			ComboKeyHandler();
-		public:
-			~ComboKeyHandler();
-			ComboNode & registerCombo(const std::string & firstKey);
-			bool evaluateKeyPress(const std::string & key);
-			bool evaluateKeyUp(const std::string & key);
-			void executeCommand(const std::string & xdotoolCommand);
+      ComboKeyHandler ( );
+      static ComboKeyHandler _INSTANCE;
+			std::unordered_map < std::string, std::unique_ptr < ComboNode > > _root;
+			std::list < std::string > _comboChain;
+			std::unordered_set < std::string > _specialKeys;
 	};
 }
 
