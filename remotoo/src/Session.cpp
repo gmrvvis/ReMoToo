@@ -17,6 +17,12 @@ namespace remotoo
     return _INSTANCE;
   }
 
+  Session::Session ( )
+   : _flow ( nullptr )
+  {
+
+  }
+
   void Session::startConnection ( )
   {
     remolonUtil::Config cfg ( "./sessionClientConfig.cfg" );
@@ -57,6 +63,11 @@ namespace remotoo
     _userName = userName_;
   }
 
+  void Session::setStreamFlow ( remo::FlowDeviceToWebStream * flow_ )
+  {
+    _flow = flow_;
+  }
+
   const std::string & Session::getSessionName ( )
   {
     return _sessionName;
@@ -69,6 +80,9 @@ namespace remotoo
 
   void Session::finishSession ( )
   {
-    
+    if ( _flow )
+    {
+      _flow->finish ( );
+    }
   }
 }

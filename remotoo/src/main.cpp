@@ -48,18 +48,12 @@ int main(int argc, char *argv[])
     webSockPort = std::stoi ( argv [ 5 ] );
     webRtcPort = std::stoi ( argv [ 6 ] );
 
-    std::cout << "Params: " << std::endl;
-    std::cout << "Session Name: " << sessionName << std::endl;
-    std::cout << "User: " << userName << std::endl;
-    std::cout << "UserIP: " << userIP << std::endl;
-    std::cout << "Web port: " << webPort << std::endl;
-    std::cout << "Web Sock port: " << webSockPort << std::endl;
-    std::cout << "Web rtc port: " << webRtcPort << std::endl;
-
     remotoo::Session::getInstance ( ).setSessionName ( sessionName );
     remotoo::Session::getInstance ( ).setUserOwnerName ( userName );
     webstreamer::AccessManager::getInstance ( ).allowAddress ( userIP );
   }
+
+  remotoo::Session::getInstance ( ).startConnection ( );
 
   CreateImmortalLogListener<ConsoleLogger>(LogLevel::WARNING);
 

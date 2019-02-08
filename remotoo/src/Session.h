@@ -3,6 +3,12 @@
 
 #include <memory>
 
+#ifndef REMO_USE_WEBSTREAMER
+#define REMO_USE_WEBSTREAMER
+#endif
+
+#include <flow/FlowDeviceToWebStream.h>
+
 #include <ReMoLON_Util/Client.h>
 
 namespace remotoo
@@ -16,6 +22,7 @@ namespace remotoo
       remolonUtil::Client & getClient ( );
       void setSessionName ( const std::string & sessionName_ );
       void setUserOwnerName ( const std::string & userName_ );
+      void setStreamFlow ( remo::FlowDeviceToWebStream * flow_ );
 
       const std::string & getSessionName ( );
       const std::string & getOwnerName ( );
@@ -23,6 +30,10 @@ namespace remotoo
       void finishSession ( );
     private:
       static Session _INSTANCE;
+
+      Session ( );
+
+      remo::FlowDeviceToWebStream * _flow;
 
       std::unique_ptr < remolonUtil::Client > _client;
 
