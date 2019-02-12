@@ -1,5 +1,7 @@
 #include "Session.h"
 
+#include <stdlib.h>
+
 #include "ReMoLON_Util/Config.h"
 
 #include "serverpackets/RequestSessionInfo.h"
@@ -19,6 +21,7 @@ namespace remotoo
 
   Session::Session ( )
    : _flow ( nullptr )
+   , _xServerPid ( -1 )
   {
 
   }
@@ -67,6 +70,11 @@ namespace remotoo
     _flow = flow_;
   }
 
+  void Session::setXSessionPID ( int xPid_ )
+  {
+    _xServerPid = xPid_;
+  }
+
   const std::string & Session::getSessionName ( )
   {
     return _sessionName;
@@ -80,9 +88,16 @@ namespace remotoo
   void Session::finishSession ( )
   {
     _client.get ( )->close ( );
+
     if ( _flow )
     {
       _flow->finish ( );
+    }
+
+    if ( _xServerPid > 0 )
+    {
+      std::string closeCommand = "kill -9 " + std::to_string ( _xServerPid );
+      system( closeCommand.c_str ( ) );
     }
   }
 }

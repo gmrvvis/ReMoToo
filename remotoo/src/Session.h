@@ -23,6 +23,7 @@ namespace remotoo
       void setSessionName ( const std::string & sessionName_ );
       void setUserOwnerName ( const std::string & userName_ );
       void setStreamFlow ( remo::FlowDeviceToWebStream * flow_ );
+      void setXSessionPID ( int xPid_ );
 
       const std::string & getSessionName ( );
       const std::string & getOwnerName ( );
@@ -39,6 +40,7 @@ namespace remotoo
 
       std::string _sessionName;
       std::string _userName;
+      int _xServerPid;
   };
 }
 

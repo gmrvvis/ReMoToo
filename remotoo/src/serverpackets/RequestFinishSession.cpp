@@ -20,7 +20,6 @@ namespace remotoo
 
     void RequestFinishSession::executePacketAction ( )
     {
-      std::cout << "REMOTOO: Received kill signal" << std::endl;
       Session::getInstance ( ).finishSession ( );
     }
   }

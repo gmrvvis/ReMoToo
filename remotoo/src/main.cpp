@@ -35,11 +35,12 @@ int main(int argc, char *argv[])
   using webstreamer::LogLevel;
 
   int webPort = -1, webSockPort = -1, webRtcPort = -1;
+  int xServerPid = -1;
 
   webstreamer::AccessManager::getInstance ( ).setAccessControlEnabled ( false );
 
   // remotoo <session name> <user owner> <user IP> <webPort> <webSockPort> <webRtcPort>
-  if ( argc >= 7)
+  if ( argc >= 8)
   {
     std::string sessionName ( argv [ 1 ] );
     std::string userName ( argv [ 2 ] );
@@ -47,9 +48,11 @@ int main(int argc, char *argv[])
     webPort = std::stoi ( argv [ 4 ] ); 
     webSockPort = std::stoi ( argv [ 5 ] );
     webRtcPort = std::stoi ( argv [ 6 ] );
+    xServerPid = std::stoi ( argv [ 7 ] );
 
     remotoo::Session::getInstance ( ).setSessionName ( sessionName );
     remotoo::Session::getInstance ( ).setUserOwnerName ( userName );
+    remotoo::Session::getInstance ( ).setXSessionPID ( xServerPid );
     webstreamer::AccessManager::getInstance ( ).allowAddress ( userIP );
   }
 
@@ -95,8 +98,6 @@ int main(int argc, char *argv[])
   //Define the flow and process
   remo::FlowDeviceToWebStream f ( is.get ( ), os.get ( ));
   f.processStreams ( );
-
-  std::cout << "Remotoo done" << std::endl;
 
   return 0;
 }
