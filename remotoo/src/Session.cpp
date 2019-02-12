@@ -27,12 +27,11 @@ namespace remotoo
   {
     remolonUtil::Config cfg ( "./sessionClientConfig.cfg" );
 
-    remolonUtil::TClientConfig clientConfig;
-    clientConfig._serverAddress = cfg.getProperty ( "remolonServerAddress" );
-		clientConfig._serverPort = cfg.getIntProperty ( "remolonServerPort" );
+    std::string serverAddress = cfg.getProperty ( "remolonServerAddress" );
+		uint16_t serverPort = cfg.getIntProperty ( "remolonServerPort" );
 
-    _client = std::make_unique < remolonUtil::Client > ( clientConfig );
-    remolonUtil::Client * cPtr = _client.get ( );
+    _client = std::make_unique < remolonUtil::RawClient > ( serverAddress, serverPort );
+    remolonUtil::RawClient * cPtr = _client.get ( );
 
     // Register receivable packets to be processed
     cPtr->registerReceivablePacket < serverpackets::RequestSessionInfo > ( );
@@ -48,9 +47,9 @@ namespace remotoo
     cPtr->sendPacket ( sessionInfo );
   }
 
-  remolonUtil::Client & Session::getClient ( )
+  remolonUtil::RawClient * Session::getClient ( )
   {
-    return *( _client.get ( ) );
+    return _client.get ( );
   }
 
   void Session::setSessionName ( const std::string & sessionName_ )
@@ -80,6 +79,7 @@ namespace remotoo
 
   void Session::finishSession ( )
   {
+    _client.get ( )->close ( );
     if ( _flow )
     {
       _flow->finish ( );

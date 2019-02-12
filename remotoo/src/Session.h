@@ -19,7 +19,7 @@ namespace remotoo
       static Session & getInstance ( );
 
       void startConnection ( );
-      remolonUtil::Client & getClient ( );
+      remolonUtil::RawClient * getClient ( );
       void setSessionName ( const std::string & sessionName_ );
       void setUserOwnerName ( const std::string & userName_ );
       void setStreamFlow ( remo::FlowDeviceToWebStream * flow_ );
@@ -35,7 +35,7 @@ namespace remotoo
 
       remo::FlowDeviceToWebStream * _flow;
 
-      std::unique_ptr < remolonUtil::Client > _client;
+      std::unique_ptr < remolonUtil::RawClient > _client;
 
       std::string _sessionName;
       std::string _userName;

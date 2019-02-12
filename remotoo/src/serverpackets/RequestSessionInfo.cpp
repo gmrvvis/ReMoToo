@@ -19,11 +19,11 @@ namespace remotoo
 
     void RequestSessionInfo::executePacketAction ( )
     {
-      remolonUtil::Client & clnt = Session::getInstance ( ).getClient ( );
+      remolonUtil::RawClient * clnt = Session::getInstance ( ).getClient ( );
 
       remolonUtil::SendablePacketPtr info = std::make_unique < clientpackets::SessionInfo > ( );
 
-      clnt.sendPacket ( info );
+      clnt->sendPacket ( info );
     }
   }
 }

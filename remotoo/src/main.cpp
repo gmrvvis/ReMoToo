@@ -96,5 +96,7 @@ int main(int argc, char *argv[])
   remo::FlowDeviceToWebStream f ( is.get ( ), os.get ( ));
   f.processStreams ( );
 
+  std::cout << "Remotoo done" << std::endl;
+
   return 0;
 }

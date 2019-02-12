@@ -2,6 +2,8 @@
 
 #include "Session.h"
 
+#include <iostream>
+
 namespace remotoo
 {
   namespace serverpackets
@@ -18,6 +20,7 @@ namespace remotoo
 
     void RequestFinishSession::executePacketAction ( )
     {
+      std::cout << "REMOTOO: Received kill signal" << std::endl;
       Session::getInstance ( ).finishSession ( );
     }
   }
