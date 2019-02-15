@@ -23,12 +23,15 @@
 #include "HttpActionHandler.h"
 #include "Session.h"
 
-//
-//int main( void )
 int main(int argc, char *argv[])
 {
 	// ====================================================================
-  // Web streamer set up
+  const unsigned int desktopWidth = 1280;
+  const unsigned int desktopHeight = 720;
+  std::string _display = ":0.0";
+  bool useSSH = false;
+
+	// Web streamer set up
   using webstreamer::ConsoleLogger;
   using webstreamer::CreateImmortalLogListener;
   using webstreamer::FileLogger;
@@ -56,12 +59,12 @@ int main(int argc, char *argv[])
     webstreamer::AccessManager::getInstance ( ).allowAddress ( userIP );
   }
 
-  remotoo::Session::getInstance ( ).startConnection ( );
+  if ( useSSH )
+  {
+    remotoo::Session::getInstance( ).startConnection( );
+  }
 
   CreateImmortalLogListener<ConsoleLogger>(LogLevel::WARNING);
-
-	const unsigned int desktopWidth = 1280;
-	const unsigned int desktopHeight = 720;
 
   //Define the input media and stream
   std::unique_ptr < remo::Media >
@@ -69,7 +72,7 @@ int main(int argc, char *argv[])
 
   // Configure to capture display 4.0
   remo::MediaDesktop * mediaDesktopPtr = static_cast < remo::MediaDesktop * > ( im.get ( ) );
-  mediaDesktopPtr->setDesktopConfigAsString ( ":4.0" );
+  mediaDesktopPtr->setDesktopConfigAsString ( _display );
 
   std::unique_ptr < remo::Stream >
     is = std::unique_ptr < remo::StreamDeviceIn > ( new remo::StreamDeviceIn

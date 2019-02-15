@@ -31,8 +31,9 @@ include( Common )
 common_find_package( Poco REQUIRED COMPONENTS Foundation Net NetSSL )
 common_find_package( webstreamer SYSTEM )
 common_find_package( ReMo REQUIRED )
-common_find_package( xdo REQUIRED )
-common_find_package( remolonutil REQUIRED )
+common_find_package( ReMoLON REQUIRED )
+
+#common_find_package( xdo REQUIRED )
 #common_find_package( clipboard REQUIRED )
 
 if (NOT WEBSTREAMER_FOUND )
@@ -42,6 +43,8 @@ endif ( )
 common_find_package_post( )
 
 add_subdirectory( remotoo )
+
+file(COPY ${PROJECT_SOURCE_DIR}/sessionClientConfig.cfg DESTINATION "${CMAKE_BINARY_DIR}/bin")
 
 set( DOCS README.md LICENSE.txt )
 install( FILES ${DOCS} DESTINATION share/ReMoToo COMPONENT dev )

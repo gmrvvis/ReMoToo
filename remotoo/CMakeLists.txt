@@ -1,6 +1,10 @@
 include_directories( ${WEBSTREAMER_INCLUDE_DIRS} )
 include_directories( ${REMO_INCLUDE_DIRS} )
 
+#TODO: ${REMOLON_UTIL_INCLUDE_DIRS} dows not work, so I force to found the exact directory
+include_directories( ${REMOLON_UTIL_INCLUDE_DIRS} )
+include_directories( ${CMAKE_SOURCE_DIR}/ReMoLON/ReMoLON_Util/include )
+
 include_directories( ${PROJECT_SOURCE_DIR}
                      ${PROJECT_SOURCE_DIR}/ReMo/ReMo
                      ${PROJECT_SOURCE_DIR}/ReMo/ReMo/flow
@@ -49,7 +53,7 @@ set( REMOTOO_INCLUDE_NAMES ReMoToo )
 set( REMOTOO_LINK_LIBRARIES Poco::NetSSL
                             ReMo
                             xdo
-                            remolonutil )
+                            remolon_util )
 
 common_application( remotoo )
 
