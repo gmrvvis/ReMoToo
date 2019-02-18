@@ -48,7 +48,7 @@ namespace remotoo
           throw std::runtime_error ( message.c_str ( ) );
         }
 
-        std::unique_ptr < ActionHandler > newHandler = std::make_unique < T > ( );
+        std::unique_ptr < ActionHandler > newHandler ( new T ( ) );
         ActionHandler * rawHandler = newHandler.get ( );
         _actionsDelegates [ rawHandler->getAction ( ) ] = std::move ( newHandler );
       }

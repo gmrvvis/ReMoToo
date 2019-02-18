@@ -33,7 +33,8 @@ namespace remotoo
     std::string serverAddress = cfg.getProperty ( "remolonServerAddress" );
 		uint16_t serverPort = cfg.getIntProperty ( "remolonServerPort" );
 
-    _client = std::make_unique < remolonUtil::RawClient > ( serverAddress, serverPort );
+    _client = std::unique_ptr < remolonUtil::RawClient > 
+              ( new remolonUtil::RawClient ( serverAddress, serverPort ) );
     remolonUtil::RawClient * cPtr = _client.get ( );
 
     // Register receivable packets to be processed
@@ -46,7 +47,8 @@ namespace remotoo
 
     // Identify the session
     remolonUtil::SendablePacketPtr
-    sessionInfo = std::make_unique < clientpackets::SessionInfo > ( );
+    sessionInfo = std::unique_ptr < clientpackets::SessionInfo > 
+                  ( new clientpackets::SessionInfo ( ) );
     cPtr->sendPacket ( sessionInfo );
   }
 

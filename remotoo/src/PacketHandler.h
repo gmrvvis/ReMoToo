@@ -63,7 +63,7 @@ namespace remotoo
           throw std::runtime_error ( message.c_str ( ) );
         }
 
-        std::unique_ptr < ReceivePacket > newPacket = std::make_unique < T > ( );
+        std::unique_ptr < ReceivePacket > newPacket ( new T ( ) );
         _packets [ newPacket.get ( )->getOpcode ( ) ] = std::move ( newPacket );
       }
 

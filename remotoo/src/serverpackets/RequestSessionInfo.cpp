@@ -21,7 +21,7 @@ namespace remotoo
     {
       remolonUtil::RawClient * clnt = Session::getInstance ( ).getClient ( );
 
-      remolonUtil::SendablePacketPtr info = std::make_unique < clientpackets::SessionInfo > ( );
+      remolonUtil::SendablePacketPtr info ( new clientpackets::SessionInfo ( ) );
 
       clnt->sendPacket ( info );
     }

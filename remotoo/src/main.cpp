@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
   const unsigned int desktopWidth = 1280;
   const unsigned int desktopHeight = 720;
   std::string _display = ":0.0";
-  bool useSSH = false;
+  bool connectToRemolon = true;
 
 	// Web streamer set up
   using webstreamer::ConsoleLogger;
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     webstreamer::AccessManager::getInstance ( ).allowAddress ( userIP );
   }
 
-  if ( useSSH )
+  if ( connectToRemolon )
   {
     remotoo::Session::getInstance( ).startConnection( );
   }

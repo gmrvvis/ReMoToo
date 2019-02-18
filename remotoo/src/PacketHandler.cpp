@@ -46,7 +46,8 @@ namespace remotoo
     clipContent.append ( code_begin, code_end );
     clipContent.push_back ( '\0' );
 
-    return std::make_unique < RequestPasteFromClientEvent > ( clipContent );
+    return std::unique_ptr < RequestPasteFromClientEvent > 
+           ( new RequestPasteFromClientEvent ( clipContent ) );
   }
 
   void RequestPasteFromClient::doAction ( webstreamer::Client & client_, 
@@ -94,7 +95,8 @@ namespace remotoo
       return it->second.get ( )->parseData ( data_, sizeBytes_ );
     }
 
-    return std::make_unique < webstreamer::Event > ( webstreamer::EventType::UNKNOWN );
+    return std::unique_ptr < webstreamer::Event > 
+           ( new webstreamer::Event ( webstreamer::EventType::UNKNOWN ) );
   }
 
   bool PacketHandler::handlePacket ( webstreamer::Client & client_, 

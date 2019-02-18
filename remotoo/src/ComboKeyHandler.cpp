@@ -54,8 +54,7 @@ namespace remotoo
 			return *( it->second.get ( ) );
 		}
 
-		std::unique_ptr < ComboNode > 
-      newNode = std::make_unique < ComboNode > ( lower );
+		std::unique_ptr < ComboNode > newNode ( new ComboNode ( lower ) );
 		ComboNode * result = newNode.get ( );
 		_tree[ lower ] = std::move ( newNode );
 		return *result;
@@ -76,8 +75,7 @@ namespace remotoo
 			return *( it->second.get ( ) );
 		}
 
-		std::unique_ptr < ComboNode > 
-      newNode = std::make_unique < ComboLeaf > ( lower, action_ );
+		std::unique_ptr < ComboNode > newNode ( new ComboLeaf ( lower, action_ ) );
 		ComboNode * result = newNode.get ( );
 		_tree[ lower ] = std::move ( newNode );
 		return *result;
@@ -164,8 +162,7 @@ namespace remotoo
 			return *( it->second.get ( ) );
 		}
 
-		std::unique_ptr < ComboNode > 
-      newNode = std::make_unique < ComboNode > ( lower );
+		std::unique_ptr < ComboNode > newNode ( new ComboNode ( lower ) );
 
 		ComboNode * result = newNode.get ( ); 
 		_root[ lower ] = std::move ( newNode );
