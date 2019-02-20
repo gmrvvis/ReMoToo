@@ -50,8 +50,7 @@ set( REMOTOO_HEADERS  src/XdoInputHandler.h
 set( REMOTOO_NAMESPACE remotoo )
 set( REMOTOO_INCLUDE_NAMES ReMoToo )
 
-set( REMOTOO_LINK_LIBRARIES Poco::NetSSL
-                            ReMo
+set( REMOTOO_LINK_LIBRARIES ReMo
                             xdo
                             remolon_util )
 
