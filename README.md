@@ -3,17 +3,17 @@ ReMoToo
 ## Introduction
 
 ReMoToo is a system service that is able to stream the desktop to web remote
-clients, making possible to have interactive sessions over remote high performance 
-systems or even regular systems through a simple web browser. 
+clients, making it possible to have interactive sessions over remote high performance 
+systems or even regular systems through a standard web browser. 
 
-The high quality visualization and low latency are key aspects of this tool, 
-to get that, ReMoToo uses video compression technology on the server side 
-and then sends the generated video stream to the client in a transparent 
+The key aspects of ReMoToo are the high quality visualization it provides as 
+well as its low latency. To achieve it, ReMoToo uses video compression on the 
+server side and sends the generated video stream to the client in a transparent 
 and easy way.
 
-On the server side, several ReMoToo instances are managed by the ReMoLON system service. This
-service is in charge of the initiation, control and stop of ReMoToo visualization
-streamed to the final web clients.
+On the server side, several ReMoToo instances are managed by another service 
+called ReMoLON. This service is in charge of the initiation, control and stop of 
+ReMoToo visualization streams.
 
 The ReMoLON system service is connected through the ReMoLON_FrontEnd, a simple web
 server running on the login node/s. This FrontEnd is in charge of the user 
