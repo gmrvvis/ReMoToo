@@ -4,11 +4,11 @@
 #define REMO_USE_WEBSTREAMER
 #endif
 
-#include <flow/FlowDeviceToWebStream.h>
-#include <pipeline/ImageConverter.h>
-#include <media/MediaDesktop.h>
-#include <media/MediaWebStreamer.h>
-#include <util/Utils.h>
+#include <ReMo/flow/FlowDeviceToWebStream.h>
+#include <ReMo/pipeline/ImageConverter.h>
+#include <ReMo/media/MediaDesktop.h>
+#include <ReMo/media/MediaWebStreamer.h>
+#include <ReMo/util/Utils.h>
 
 #include <webstreamer/console_logger.hpp>
 #include <webstreamer/file_logger.hpp>

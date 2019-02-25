@@ -33,9 +33,6 @@ common_find_package( webstreamer SYSTEM )
 common_find_package( ReMo REQUIRED )
 common_find_package( ReMoLON REQUIRED )
 
-#common_find_package( xdo REQUIRED )
-#common_find_package( clipboard REQUIRED )
-
 if (NOT WEBSTREAMER_FOUND )
   message ( FATAL "ReMoToo requires WebStreamer! Please build ReMo and ReMoToo with this dependency." )
 endif ( )

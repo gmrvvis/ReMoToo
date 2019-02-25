@@ -99,7 +99,9 @@ namespace remotoo
     if ( _xServerPid > 0 )
     {
       std::string closeCommand = "kill -9 " + std::to_string ( _xServerPid );
-      system( closeCommand.c_str ( ) );
+      auto returnValue = system( closeCommand.c_str ( ) );
+      if ( returnValue == -1 )
+	std::cerr << "Error calling system with argument " + closeCommand << std::endl;
     }
   }
 }
