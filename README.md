@@ -36,12 +36,13 @@ the remote visualization:
 
 ## Building
 
-ReMoToo has been successfully built and used on Ubuntu 18.04/Debian Strech Stable.
-The following steps should be enough to build it just with the required dependencies.
-ReMoToo (and ReMo) needs to be built with the WebStreamer dependency, and WebStreamer
-needs to be compiled as shared library (setting the CMAKE variable BUILD_SHARED_LIBS
-to ON). Then the WebStreamer build directory needs to be specified to ReMoToo at configuration
-time using CMAKE_PREFIX_PATH variable.
+ReMoToo has been successfully built and used on Ubuntu 18.04/Debian Strech Stable 
+as well as on CentOS 7. The following steps should be enough to build it just 
+with the required dependencies. ReMoToo (and ReMo) needs to be built with the 
+WebStreamer dependency, and WebStreamer needs to be compiled as shared library 
+(setting the CMAKE variable BUILD_SHARED_LIBS to ON). Then the WebStreamer 
+build directory needs to be specified to ReMoToo at configuration time using 
+CMAKE_PREFIX_PATH variable.
 
 ## Description
 
