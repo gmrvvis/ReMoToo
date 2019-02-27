@@ -1,0 +1,3 @@
+#-*- mode: cmake -*-
+git_subproject(ReMo git@gitlab.gmrv.es:RR/ReMo.git 92a9050)
+git_subproject(ReMoLON git@gitlab.gmrv.es:RR/ReMoLON.git d4d33409)
