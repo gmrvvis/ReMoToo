@@ -7,8 +7,7 @@
 #define REMO_USE_WEBSTREAMER
 #endif
 
-#include <flow/FlowDeviceToWebStream.h>
-
+#include <ReMo/flow/FlowDeviceToWebStream.h>
 #include <ReMoLON_Util/Client.h>
 
 namespace remotoo

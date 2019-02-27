@@ -5,7 +5,7 @@
 #define REMO_USE_WEBSTREAMER
 #endif
 
-#include <IO/WebstreamerInputProcessor.h>
+#include <ReMo/util/IO/WebstreamerInputProcessor.h>
 
 #include <string>
 

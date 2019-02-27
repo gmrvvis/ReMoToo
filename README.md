@@ -29,6 +29,7 @@ the remote visualization:
     * [ReMo](https://github.com/HBPVIS/remo) (and it's dependencies, see the details on the official)
     * [ReMoLON](https://github.com/HBPVIS/remolon)
     * [WebStreamer](https://github.com/HBPVIS/webstreamer)
+    * xdotool (libxdo-dev package for DEB-based Linux distributions)
 
 * Optional dependencies:
     * [libClipboard](https://github.com/jtanx/libclipboard): To have remote clipboard

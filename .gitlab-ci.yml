@@ -1,0 +1,15 @@
+stages:
+ - build
+
+Ubuntu:
+ stage: build
+ script:
+  - date
+  - hostname
+  - uname -a
+  - module load webstreamer poco-1.8.1
+  - export BUILD_GENERATOR="Ninja"
+  - export CMAKE_EXTRA_ARGS="-DCLONE_SUBPROJECTS=ON -DCMAKE_PREFIX_PATH=$WEBSTREAMER_DIR;$POCO_DIR"
+  - bash .gitlab-ci.sh
+ tags:
+  - ubuntu

@@ -90,6 +90,7 @@ namespace remotoo
 	
 	bool ComboLeaf::evaluate ( std::list < std::string > & chain_ )
 	{
+		(void) chain_;
 		assert ( chain_.size ( ) < 2 );
 		_action ( );
 		return true;
